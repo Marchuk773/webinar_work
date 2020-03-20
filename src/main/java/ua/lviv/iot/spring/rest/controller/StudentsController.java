@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -52,12 +51,12 @@ public class StudentsController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<Student> updeteStudent(final @PathVariable("id") Integer studentID,
+    public ResponseEntity<Student> updateStudent(final @PathVariable("id") Integer studentID,
             final @RequestBody Student student) {
         student.setId(studentID);
         HttpStatus status = students.put(student.getId(), student) == null ? HttpStatus.NOT_FOUND
                 : HttpStatus.OK;
         return ResponseEntity.status(status).build();
     }
-    
+
 }
