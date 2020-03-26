@@ -1,25 +1,37 @@
-package ua.lviv.iot.spring.rest.model;
+package ua.lviv.iot.spring.first.rest.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Student {
     private String firstName;
     private String lastName;
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-    public Student(String firstName, String lastName, int id) {
+    public Student(String firstName, String lastName, Integer id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = id;
     }
 
-    public Student() {
-        this(null, null, 0);
+    public Student(String firstName, String lastName) {
+        this(firstName, lastName, null);
     }
 
-    public int getId() {
+    public Student() {
+        this(null, null);
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
