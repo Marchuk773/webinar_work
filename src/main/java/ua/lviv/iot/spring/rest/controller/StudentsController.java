@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +17,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ua.lviv.iot.spring.first.business.StudentService;
 import ua.lviv.iot.spring.rest.model.Student;
 
 @RequestMapping("/students")
 @RestController
 public class StudentsController {
-
     private Map<Integer, Student> students = new HashMap<>();
     private AtomicInteger idCounter = new AtomicInteger();
+
+    @Autowired
+    private StudentService studentService;
 
     @GetMapping
     public List<Student> getStudents() {
@@ -36,8 +40,9 @@ public class StudentsController {
         return students.get(studentID);
     }
 
-    @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE, "application/x-yaml" })
+    @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
     public Student createStudent(final @RequestBody Student student) {
+       // System.out.println(studentService.createStudent(student));
         student.setId(idCounter.incrementAndGet());
         students.put(student.getId(), student);
         return student;
