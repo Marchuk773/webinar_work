@@ -1,4 +1,4 @@
-package ua.lviv.iot.spring.rest.model;
+package ua.lviv.iot.spring.first.rest.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,14 +9,18 @@ import javax.persistence.Id;
 public class Student {
     private String firstName;
     private String lastName;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    public Student(String firstName, String lastName) {
+    public Student(String firstName, String lastName, Integer id) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.id = id;
+    }
+
+    public Student(String firstName, String lastName) {
+        this(firstName, lastName, null);
     }
 
     public Student() {
