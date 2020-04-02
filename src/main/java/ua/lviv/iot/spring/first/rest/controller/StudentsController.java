@@ -41,7 +41,6 @@ public class StudentsController {
     @PostMapping
     public Student createStudent(final @RequestBody Student student) {
         student.setId(idCounter.incrementAndGet());
-        studentService.createStudent(student);
         System.out.println(studentService.createStudent(student));
         students.put(student.getId(), student);
         return student;
