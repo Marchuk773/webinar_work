@@ -1,7 +1,6 @@
 package ua.lviv.iot.spring.first.rest.controller;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -29,7 +28,7 @@ public class StudentsController {
 
     @GetMapping
     public List<Student> getStudents() {
-        return new LinkedList<Student>(students.values());
+        return studentService.findAll();
     }
 
     @GetMapping(path = "/{id}")
@@ -41,8 +40,7 @@ public class StudentsController {
     @PostMapping
     public Student createStudent(final @RequestBody Student student) {
         student.setId(idCounter.incrementAndGet());
-        System.out.println(studentService.createStudent(student));
-        students.put(student.getId(), student);
+        studentService.createStudent(student);
         return student;
     }
 
